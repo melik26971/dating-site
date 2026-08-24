@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>یک قرار؟ 💌</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <div class="background-glow">
+        <div class="glow glow-1"></div>
+        <div class="glow glow-2"></div>
+        <div class="glow glow-3"></div>
+    </div>
+
+    <div class="glass-bubbles">
+        <div class="bubble bubble-1"></div>
+        <div class="bubble bubble-2"></div>
+        <div class="bubble bubble-3"></div>
+    </div>
+
+    <div class="floating-emojis">
+        <span>❤️</span>
+        <span>🩷</span>
+        <span>💕</span>
+        <span>🧸</span>
+        <span>💗</span>
+        <span>❤️</span>
+        <span>🩷</span>
+        <span>💕</span>
+        <span>🧸</span>
+        <span>💞</span>
+        <span>❤️</span>
+        <span>🩷</span>
+    </div>
+
+    <div class="page">
+
+        <div class="glass-card">
+
+            <div class="heart">💌</div>
+
+            <div class="small-title">
+                یک پیشنهاد کوچک...
+            </div>
+
+            <h1>
+                برای یه قرار<br>
+                وقت داری؟
+            </h1>
+
+            <div class="description">
+                این بار انتخاب مکان، تاریخ و ساعتش با خودته.
+            </div>
+
+            <a
+                href="{{ url_for('date_page') }}"
+                class="main-button">
+                بریم برای قرار ❤️
+            </a>
+
+        </div>
+
+    </div>
+<audio id="bgMusic" loop>
+    <source src="{{ url_for('static', filename='music/Angel.mp3') }}" type="audio/mpeg">
+</audio>
+
+<button id="musicButton" type="button" aria-label="پخش آهنگ">
+    🎵
+</button>
+
+<script>
+    const music = document.getElementById("bgMusic");
+    const button = document.getElementById("musicButton");
+
+    const savedTime = localStorage.getItem("musicTime");
+    const musicEnabled = localStorage.getItem("musicEnabled");
+
+    if (savedTime) {
+        music.addEventListener("loadedmetadata", () => {
+            music.currentTime = Number(savedTime);
+        }, { once: true });
+    }
+
+    music.addEventListener("timeupdate", () => {
+        localStorage.setItem("musicTime", music.currentTime);
+    });
+
+    button.addEventListener("click", async () => {
+
+        if (music.paused) {
+
+            try {
+                await music.play();
+
+                localStorage.setItem("musicEnabled", "true");
+
+                button.textContent = "🔊";
+
+            } catch (error) {
+                console.log(error);
+            }
+
+        } else {
+
+            music.pause();
+
+            localStorage.setItem("musicEnabled", "false");
+
+            button.textContent = "🎵";
+        }
+    });
+
+    if (musicEnabled === "true") {
+
+        music.play()
+            .then(() => {
+                button.textContent = "🔊";
+            })
+            .catch(() => {
+                button.textContent = "🎵";
+            });
+    }
+</script>
+</body>
+
+</html>

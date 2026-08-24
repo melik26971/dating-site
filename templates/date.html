@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>انتخاب قرار 💗</title>
+
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+
+    <!-- نورهای پس‌زمینه -->
+    <div class="background-glow">
+
+        <div class="glow glow-1"></div>
+        <div class="glow glow-2"></div>
+        <div class="glow glow-3"></div>
+
+    </div>
+
+
+    <!-- حباب‌های شیشه‌ای -->
+    <div class="glass-bubbles">
+
+        <div class="bubble bubble-1"></div>
+        <div class="bubble bubble-2"></div>
+        <div class="bubble bubble-3"></div>
+
+    </div>
+
+
+    <!-- ایموجی‌های شناور -->
+    <div class="floating-emojis">
+
+        <span>❤️</span>
+        <span>🩷</span>
+        <span>💕</span>
+        <span>🧸</span>
+        <span>💗</span>
+        <span>❤️</span>
+        <span>🩷</span>
+        <span>💕</span>
+        <span>🧸</span>
+        <span>💞</span>
+        <span>❤️</span>
+        <span>🩷</span>
+
+    </div>
+
+
+    <!-- صفحه اصلی -->
+    <main class="page">
+
+        <section class="glass-card form-card">
+
+
+            <!-- قلب -->
+            <div class="heart">
+                💗
+            </div>
+
+
+            <!-- عنوان کوچک -->
+            <p class="small-title">
+                مرحله دوم
+            </p>
+
+
+            <!-- عنوان اصلی -->
+            <h1>
+                قرارمون رو انتخاب کن
+            </h1>
+
+
+            <!-- توضیحات -->
+            <p class="description">
+                حالا مکان، تاریخ و ساعت مورد علاقه‌ات رو انتخاب کن.
+            </p>
+
+
+            <!-- خطا -->
+            {% if error %}
+
+            <div class="error">
+                {{ error }}
+            </div>
+
+            {% endif %}
+
+
+            <!-- فرم -->
+            <form method="POST">
+
+
+                <!-- مکان -->
+                <label for="location">
+                    📍 مکان قرار
+                </label>
+
+                <select
+                    id="location"
+                    name="location"
+                    required
+                >
+
+                    <option value="">
+                        انتخاب مکان
+                    </option>
+
+                    <option value="کافه ☕">
+                        کافه ☕
+                    </option>
+
+                    <option value="رستوران 🍽️">
+                        رستوران 🍽️
+                    </option>
+
+                    <option value="پارک 🌳">
+                        پارک 🌳
+                    </option>
+
+                    <option value="سینما 🎬">
+                        سینما 🎬
+                    </option>
+
+                    <option value="جای دیگه ✨">
+                        جای دیگه ✨
+                    </option>
+
+                </select>
+
+
+                <!-- تاریخ -->
+                <label for="date">
+                    📅 تاریخ قرار
+                </label>
+
+                <input
+                    id="date"
+                    type="date"
+                    name="date"
+                    required
+                >
+
+
+                <!-- ساعت -->
+                <label for="time">
+                    🕐 ساعت قرار
+                </label>
+
+                <input
+                    id="time"
+                    type="time"
+                    name="time"
+                    required
+                >
+
+
+                <!-- توضیح -->
+                <label for="message">
+                    💌 توضیح
+                </label>
+
+                <textarea
+                    id="message"
+                    name="message"
+                    rows="4"
+                    placeholder="اگر چیزی می‌خوای بگی، اینجا بنویس..."
+                ></textarea>
+
+
+                <!-- دکمه -->
+                <button
+                    type="submit"
+                    class="main-button"
+                >
+                    ثبت قرار ❤️
+                </button>
+
+
+            </form>
+
+        </section>
+
+    </main>
+<audio id="bgMusic" loop>
+    <source src="{{ url_for('static', filename='music/Angel.mp3') }}" type="audio/mpeg">
+</audio>
+
+<button id="musicButton" type="button" aria-label="پخش آهنگ">
+    🎵
+</button>
+
+<script>
+    const music = document.getElementById("bgMusic");
+    const button = document.getElementById("musicButton");
+
+    const savedTime = localStorage.getItem("musicTime");
+    const musicEnabled = localStorage.getItem("musicEnabled");
+
+    if (savedTime) {
+        music.addEventListener("loadedmetadata", () => {
+            music.currentTime = Number(savedTime);
+        }, { once: true });
+    }
+
+    music.addEventListener("timeupdate", () => {
+        localStorage.setItem("musicTime", music.currentTime);
+    });
+
+    button.addEventListener("click", async () => {
+
+        if (music.paused) {
+
+            try {
+                await music.play();
+
+                localStorage.setItem("musicEnabled", "true");
+
+                button.textContent = "🔊";
+
+            } catch (error) {
+                console.log(error);
+            }
+
+        } else {
+
+            music.pause();
+
+            localStorage.setItem("musicEnabled", "false");
+
+            button.textContent = "🎵";
+        }
+    });
+
+    if (musicEnabled === "true") {
+
+        music.play()
+            .then(() => {
+                button.textContent = "🔊";
+            })
+            .catch(() => {
+                button.textContent = "🎵";
+            });
+    }
+</script>
+</body>
+
+</html>

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>پنل مدیریت</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <main class="admin-page">
+
+        <div class="admin-header">
+
+            <div>
+                <h1>پنل قرارها 💌</h1>
+
+                <p>
+                    قرارهای ثبت‌شده
+                </p>
+            </div>
+
+            <a
+                href="{{ url_for('admin_logout') }}"
+                class="logout-button"
+            >
+                خروج
+            </a>
+
+        </div>
+
+
+        {% if dates %}
+
+            <div class="dates-container">
+
+                {% for date in dates %}
+
+                    <article class="date-item">
+
+                        <div class="date-top">
+
+                            <span class="status">
+                                ❤️ ثبت شده
+                            </span>
+
+                            <span class="date-number">
+                                #{{ date["id"] }}
+                            </span>
+
+                        </div>
+
+
+                        <div class="info-row">
+                            <span>📍 مکان</span>
+                            <strong>{{ date["location"] }}</strong>
+                        </div>
+
+
+                        <div class="info-row">
+                            <span>📅 تاریخ</span>
+                            <strong>{{ date["date"] }}</strong>
+                        </div>
+
+
+                        <div class="info-row">
+                            <span>🕐 ساعت</span>
+                            <strong>{{ date["time"] }}</strong>
+                        </div>
+
+
+                        {% if date["message"] %}
+
+                            <div class="message-box">
+
+                                <span>
+                                    💌 توضیح
+                                </span>
+
+                                <p>
+                                    {{ date["message"] }}
+                                </p>
+
+                            </div>
+
+                        {% endif %}
+
+
+                        <form
+                            method="POST"
+                            action="{{ url_for('delete_date', date_id=date['id']) }}"
+                        >
+
+                            <button
+                                type="submit"
+                                class="delete-button"
+                            >
+                                حذف
+                            </button>
+
+                        </form>
+
+                    </article>
+
+                {% endfor %}
+
+            </div>
+
+        {% else %}
+
+            <div class="empty-state">
+
+                <div>
+                    💭
+                </div>
+
+                <h2>
+                    هنوز قراری ثبت نشده
+                </h2>
+
+                <p>
+                    وقتی قراری ثبت بشه، اینجا نمایش داده می‌شه.
+                </p>
+
+            </div>
+
+        {% endif %}
+
+    </main>
+
+</body>
+
+</html>

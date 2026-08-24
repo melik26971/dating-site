@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ورود مدیریت</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <main class="page">
+
+        <section class="glass-card admin-login">
+
+            <div class="heart">
+                🔐
+            </div>
+
+            <h1>
+                پنل خصوصی
+            </h1>
+
+            <p class="description">
+                رمز عبور را وارد کن.
+            </p>
+
+            {% if error %}
+                <div class="error">
+                    {{ error }}
+                </div>
+            {% endif %}
+
+            <form method="POST">
+
+                <input
+                    type="password"
+                    name="password"
+                    placeholder="رمز عبور"
+                    required
+                >
+
+                <button
+                    type="submit"
+                    class="main-button submit-button"
+                >
+                    ورود
+                </button>
+
+            </form>
+
+        </section>
+
+    </main>
+
+</body>
+
+</html>

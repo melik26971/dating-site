@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>قرار ثبت شد ❤️</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+    <style>
+
+        /* =========================
+           بک‌گراند صفحه آخر
+        ========================= */
+
+        body {
+            background:
+                radial-gradient(
+                    circle at 15% 20%,
+                    rgba(255, 170, 205, 0.8),
+                    transparent 35%
+                ),
+                radial-gradient(
+                    circle at 85% 75%,
+                    rgba(205, 175, 255, 0.7),
+                    transparent 38%
+                ),
+                linear-gradient(
+                    135deg,
+                    #ffe4ef,
+                    #eadcff
+                );
+
+            overflow: hidden;
+        }
+
+
+        /* =========================
+           نورهای محو
+        ========================= */
+
+        .success-glow {
+            position: fixed;
+            inset: 0;
+
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .success-glow::before,
+        .success-glow::after {
+
+            content: "";
+
+            position: absolute;
+
+            width: 280px;
+            height: 280px;
+
+            border-radius: 50%;
+
+            filter: blur(80px);
+
+            opacity: 0.35;
+
+            animation:
+                glowFloat 8s ease-in-out infinite alternate;
+        }
+
+        .success-glow::before {
+            background: #ff9fc5;
+
+            top: -80px;
+            left: -80px;
+        }
+
+        .success-glow::after {
+            background: #c5a5ff;
+
+            right: -80px;
+            bottom: -80px;
+
+            animation-delay: 2s;
+        }
+
+        @keyframes glowFloat {
+
+            from {
+                transform: translate(0, 0);
+            }
+
+            to {
+                transform: translate(25px, -20px);
+            }
+        }
+
+
+        /* =========================
+           قلب‌های شناور
+        ========================= */
+
+        .success-hearts {
+            position: fixed;
+            inset: 0;
+
+            overflow: hidden;
+
+            pointer-events: none;
+
+            z-index: 3;
+        }
+
+        .success-hearts span {
+
+            position: absolute;
+
+            bottom: -50px;
+
+            font-size: 22px;
+
+            opacity: 0;
+
+            animation:
+                successHeartFloat 5s linear forwards;
+        }
+
+        .success-hearts span:nth-child(1) {
+            left: 8%;
+            animation-delay: 2.8s;
+        }
+
+        .success-hearts span:nth-child(2) {
+            left: 20%;
+            animation-delay: 3.2s;
+        }
+
+        .success-hearts span:nth-child(3) {
+            left: 35%;
+            animation-delay: 3.6s;
+        }
+
+        .success-hearts span:nth-child(4) {
+            left: 50%;
+            animation-delay: 3s;
+        }
+
+        .success-hearts span:nth-child(5) {
+            left: 65%;
+            animation-delay: 3.8s;
+        }
+
+        .success-hearts span:nth-child(6) {
+            left: 80%;
+            animation-delay: 3.3s;
+        }
+
+        .success-hearts span:nth-child(7) {
+            left: 92%;
+            animation-delay: 4s;
+        }
+
+        @keyframes successHeartFloat {
+
+            0% {
+                transform:
+                    translateY(0)
+                    scale(0.6)
+                    rotate(0deg);
+
+                opacity: 0;
+            }
+
+            15% {
+                opacity: 0.75;
+            }
+
+            75% {
+                opacity: 0.75;
+            }
+
+            100% {
+                transform:
+                    translateY(-105vh)
+                    scale(1.05)
+                    rotate(20deg);
+
+                opacity: 0;
+            }
+        }
+
+
+        /* =========================
+           بوس بزرگ
+        ========================= */
+
+        .kiss-screen {
+            position: fixed;
+            inset: 0;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            z-index: 100;
+
+            pointer-events: none;
+
+            animation:
+                kissScreen 2.8s ease forwards;
+        }
+
+        .big-kiss {
+
+            font-size: 130px;
+
+            opacity: 0;
+
+            filter:
+                drop-shadow(
+                    0 10px 25px
+                    rgba(220, 50, 100, 0.25)
+                );
+
+            animation:
+                bigKiss 2.4s ease forwards;
+        }
+
+        @keyframes bigKiss {
+
+            0% {
+                opacity: 0;
+
+                transform:
+                    scale(0.3);
+            }
+
+            25% {
+                opacity: 1;
+
+                transform:
+                    scale(1.15);
+            }
+
+            45% {
+                transform:
+                    scale(1);
+            }
+
+            75% {
+                opacity: 1;
+
+                transform:
+                    scale(1);
+            }
+
+            100% {
+                opacity: 0;
+
+                transform:
+                    scale(1.35);
+            }
+        }
+
+        @keyframes kissScreen {
+
+            0%,
+            75% {
+                visibility: visible;
+            }
+
+            100% {
+                visibility: hidden;
+            }
+        }
+
+
+        /* =========================
+           کارت نهایی
+        ========================= */
+
+        .success-content {
+
+            position: relative;
+
+            z-index: 10;
+
+            opacity: 0;
+
+            animation:
+                successAppear 0.9s ease forwards;
+
+            animation-delay: 2.3s;
+        }
+
+        @keyframes successAppear {
+
+            from {
+                opacity: 0;
+
+                transform:
+                    translateY(20px)
+                    scale(0.98);
+            }
+
+            to {
+                opacity: 1;
+
+                transform:
+                    translateY(0)
+                    scale(1);
+            }
+        }
+
+
+        /* =========================
+           قلب داخل کارت
+        ========================= */
+
+        .success-icon {
+
+            animation:
+                successHeart 2.5s ease-in-out infinite;
+
+            filter:
+                drop-shadow(
+                    0 6px 15px
+                    rgba(220, 50, 100, 0.2)
+                );
+        }
+
+        @keyframes successHeart {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.08);
+            }
+        }
+
+
+        /* =========================
+           دکمه موزیک
+        ========================= */
+
+        #musicButton {
+
+            position: fixed;
+
+            right: 20px;
+            bottom: 20px;
+
+            width: 52px;
+            height: 52px;
+
+            z-index: 999999;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            border: 1px solid rgba(255, 255, 255, 0.85);
+
+            border-radius: 50%;
+
+            background: rgba(255, 255, 255, 0.72);
+
+            backdrop-filter: blur(12px);
+
+            color: #642d49;
+
+            font-size: 21px;
+
+            cursor: pointer;
+
+            box-shadow:
+                0 8px 25px
+                rgba(80, 40, 70, 0.18);
+
+            transition:
+                transform 0.25s ease,
+                background 0.25s ease;
+        }
+
+        #musicButton:hover {
+
+            transform: scale(1.08);
+
+            background:
+                rgba(255, 255, 255, 0.9);
+        }
+
+        #musicButton:active {
+
+            transform: scale(0.94);
+        }
+
+
+        /* موبایل */
+
+        @media (max-width: 600px) {
+
+            #musicButton {
+
+                right: 15px;
+                bottom: 15px;
+
+                width: 48px;
+                height: 48px;
+
+                font-size: 19px;
+            }
+
+            .big-kiss {
+                font-size: 110px;
+            }
+        }
+        </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- نورهای پس‌زمینه -->
+
+    <div class="success-glow"></div>
+
+
+    <!-- قلب‌های شناور -->
+
+    <div class="success-hearts">
+
+        <span>❤️</span>
+        <span>🩷</span>
+        <span>💕</span>
+        <span>💗</span>
+        <span>❤️</span>
+        <span>🩷</span>
+        <span>💕</span>
+
+    </div>
+
+
+    <!-- بوس ابتدای صفحه -->
+
+    <div class="kiss-screen">
+
+        <div class="big-kiss">
+            💋
+        </div>
+
+    </div>
+
+
+    <!-- کارت نهایی -->
+
+    <main class="page">
+
+        <section class="glass-card success-content">
+
+            <div class="success-icon">
+                ❤️
+            </div>
+
+            <h1>
+                قرار ثبت شد!
+            </h1>
+
+            <p class="description">
+                انتخاب‌هات با موفقیت ثبت شدن.
+            </p>
+
+            <div class="final-message">
+                حالا فقط باید منتظر روز قرار بمونیم ✨
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- آهنگ -->
+
+    <audio id="bgMusic" loop>
+
+        <source
+            src="{{ url_for('static', filename='music/Angel.mp3') }}"
+            type="audio/mpeg">
+
+    </audio>
+
+
+    <!-- دکمه موزیک -->
+
+    <button
+        id="musicButton"
+        type="button"
+        aria-label="پخش آهنگ">
+
+        🎵
+
+    </button>
+
+
+    <!-- کنترل آهنگ -->
+
+    <script>
+
+        const music =
+            document.getElementById("bgMusic");
+
+        const button =
+            document.getElementById("musicButton");
+
+
+        const savedTime =
+            localStorage.getItem("musicTime");
+
+        const musicEnabled =
+            localStorage.getItem("musicEnabled");
+
+
+        /* ادامه از زمان قبلی */
+
+        if (savedTime) {
+
+            music.addEventListener(
+                "loadedmetadata",
+                () => {
+
+                    music.currentTime =
+                        Number(savedTime);
+
+                },
+                { once: true }
+            );
+        }
+
+
+        /* ذخیره زمان آهنگ */
+
+        music.addEventListener(
+            "timeupdate",
+            () => {
+
+                localStorage.setItem(
+                    "musicTime",
+                    music.currentTime
+                );
+
+            }
+        );
+
+
+        /* دکمه پخش / توقف */
+
+        button.addEventListener(
+            "click",
+            async () => {
+
+                if (music.paused) {
+
+                    try {
+
+                        await music.play();
+
+                        localStorage.setItem(
+                            "musicEnabled",
+                            "true"
+                        );
+
+                        button.textContent = "🔊";
+
+                    } catch (error) {
+
+                        console.log(error);
+
+                    }
+
+                } else {
+
+                    music.pause();
+
+                    localStorage.setItem(
+                        "musicEnabled",
+                        "false"
+                    );
+
+                    button.textContent = "🎵";
+                }
+
+            }
+        );
+
+
+        /* تلاش برای ادامه خودکار */
+
+        if (musicEnabled === "true") {
+
+            music.play()
+
+                .then(() => {
+
+                    button.textContent = "🔊";
+
+                })
+
+                .catch(() => {
+
+                    button.textContent = "🎵";
+
+                });
+        }
+
+    </script>
+
+
+</body>
+
+</html>
